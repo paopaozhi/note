@@ -30,6 +30,7 @@ sudo apt install openssh-server
 > ```
 >
 > 💡解决方案：
+>
 > ```bash
 > sudo rm /var/lib/dpkg/lock-frontend
 > sudo rm /var/lib/dpkg/lock
@@ -60,8 +61,6 @@ chmod 700 ~/.ssh
 sudo apt install net-tools
 ```
 
-
-
 ## 安装嵌入式ARM开发环境
 
 ### 安装ARM交叉编译器
@@ -86,3 +85,58 @@ arm-linux-gnueabi-g++ -v
 apt install qemu-utils qemu-system-x86 qemu-system-gui qemu-system-arm
 ```
 
+## 配置C编译环境
+
+1. 安装基础环境
+
+```shell
+sudo apt install build-essential
+```
+
+2. 安装cmake
+
+    1.使用安装命令
+
+    ```shell
+    sudo apt-get install cmake
+    ```
+
+    2.cmake源码安装
+
+    卸载原来的cmake
+
+    ```sh
+    sudo apt-get remove cmake
+    ```
+
+    下载源码
+
+    ```sh
+    wget https://github.com/Kitware/CMake/releases/download/v3.23.0/cmake-3.23.0.tar.gz
+    ```
+
+    解压源码
+
+    ```sh
+    tar -zxf cmake-3.23.0.tar.gz
+    ```
+
+    下载编译器与必要库
+
+    ```sh
+    sudo apt-get intsall g++ libssl-dev
+    ```
+
+    编译
+
+    ```shell
+    ./bootstrap         #配置
+    make                #编译
+    sudo make install   #安装
+    ```
+
+    验证安装
+
+    ```sh
+    cmake --version
+    ```

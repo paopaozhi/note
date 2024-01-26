@@ -1,4 +1,4 @@
-site_name: 小的学习笔记
+site_name: 小赵的学习笔记
 # site_author: IOT
 site_description: note
 repo_name: ohos-applied-note
@@ -9,13 +9,14 @@ copyright: Copyright &copy; 2024 paopaozhi
 
 nav:
   - 主页: index.md
-  - liunx: liunx/
-  - English: english/
   - 嵌入式: 嵌入式/
+  - liunx: liunx/
   - python: python/
+  - Luckfox-Pico: Luckfox-Pico/
   - 机器学习: 机器学习/
   - go: go/
-  - Luckfox-Pico: Luckfox-Pico/
+  
+  - English: english/
 
 theme:
   name: material
@@ -60,8 +61,8 @@ theme:
   font:
     text: Noto Sans SC
     code: Fira Code
-  favicon: assets/iot.png
-  logo: assets/iot.png
+  favicon: assets/Compose.png
+  logo: assets/Compose.png
   icon:
     logo: logo
     repo: fontawesome/brands/github

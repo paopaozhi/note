@@ -1,8 +1,8 @@
-树莓派设置ssh免密登录
+# 树莓派设置ssh免密登录
 
 1.ssh-keygen 生成公钥和私钥
 
-2.上传公钥 
+2.上传公钥
 
 ```powershell
 scp C:\Users\paopaozhi\.ssh\id_rsa.pub <用户名>@<IP地址>:~/.ssh/

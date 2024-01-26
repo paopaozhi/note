@@ -62,4 +62,4 @@ sudo service cron restart
 vim <重定向日志路径>
 ```
 
-![image-20220412210445289](https://picture.paopaozhiiot.cn/202204122104385.png)
+![Alt text](figures/202204122104385.png)
