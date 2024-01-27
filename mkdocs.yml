@@ -1,8 +1,8 @@
 site_name: 小赵的学习笔记
 # site_author: IOT
 site_description: note
-repo_name: ohos-applied-note
-repo_url: https://gitee.com/paopaozhi/ohos-applied-note
+repo_name: note
+repo_url: https://gitee.com/paopaozhi/note
 
 # Copyright
 copyright: Copyright &copy; 2024 paopaozhi
@@ -10,12 +10,12 @@ copyright: Copyright &copy; 2024 paopaozhi
 nav:
   - 主页: index.md
   - 嵌入式: 嵌入式/
-  - liunx: liunx/
-  - python: python/
+  - Liunx: liunx/
+  - Python: python/
   - Luckfox-Pico: Luckfox-Pico/
   - 机器学习: 机器学习/
-  - go: go/
-  
+  - 电子技术: 电子技术/
+  - Go: go/
   - English: english/
 
 theme:
@@ -126,4 +126,3 @@ extra_css:
 
 extra_javascript:
   - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML
-  - demo.js
