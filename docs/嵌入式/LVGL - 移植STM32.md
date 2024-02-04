@@ -7,7 +7,7 @@
 
 # LVGL概述
 
-![](./LVGL - 移植STM32.assets/01_logo_lvgl.png)
+![](./figures/01_logo_lvgl.png)
 
 LVGL(轻巧而多功能的图形库)是一个免费的开放源代码图形库，它提供创建具有易于使用的图形元素，精美的视觉效果和低内存占用的嵌入式GUI所需的一切。
 
@@ -27,7 +27,7 @@ LVGLV8.3：[Release Release v8.3.3 · lvgl/lvgl (github.com)](https://github.com
 
 创建好的工程文件夹如下：
 
-![image-20221016221509786](./LVGL - 移植STM32.assets/image-20221016221509786.png)
+![image-20221016221509786](./figures/image-20221016221509786.png)
 
 虽然我们通过BearPi-IoT官方教程已经完成了LCD的简单驱动，但是，为了可以使用LVGL我们至少实现一个画点函数，这里直接给出代码，将其放到**lcd_spi2_drv.c**
 
@@ -64,21 +64,21 @@ void LCD_Draw_ColorPoint(uint16_t x, uint16_t y, uint16_t color) {
 
 并且为了驱动LVGL我们初始化一个定时器，开启中断，时钟频率为1ms
 
-![image-20221016224333356](./LVGL - 移植STM32.assets/image-20221016224333356.png)
+![image-20221016224333356](./figures/image-20221016224333356.png)
 
 **注意：请务必在主函数中开启定时器的中断**
 
-![image-20221016225049287](./LVGL - 移植STM32.assets/image-20221016225049287.png)
+![image-20221016225049287](./figures/image-20221016225049287.png)
 
 ## 添加lvgl文件
 
 将LVGL源码文件复制到工程中。**建议新建一个文件夹独立存放**
 
-![image-20221016230434923](./LVGL - 移植STM32.assets/image-20221016230434923.png)
+![image-20221016230434923](./figures/image-20221016230434923.png)
 
 注意：**porting**文件夹来自**examples**
 
-![image-20221016230815252](./LVGL - 移植STM32.assets/image-20221016230815252.png)
+![image-20221016230815252](./figures/image-20221016230815252.png)
 
 修改头文件名称将**_template**去掉，该步骤不影响后续移植，笔者只是为了美观方便。
 
@@ -92,11 +92,11 @@ void LCD_Draw_ColorPoint(uint16_t x, uint16_t y, uint16_t color) {
     **widgets目录下所有子目录文件**
     **lv_extra.c**
 
-![image-20221016232606336](./LVGL - 移植STM32.assets/image-20221016232606336.png)
+![image-20221016232606336](./figures/image-20221016232606336.png)
 
 将**porting**文件夹的所有C文件加入keil工程中
 
-![image-20221016232652123](./LVGL - 移植STM32.assets/image-20221016232652123.png)
+![image-20221016232652123](./figures/image-20221016232652123.png)
 
 
 

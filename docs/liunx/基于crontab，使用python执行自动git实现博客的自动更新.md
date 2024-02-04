@@ -1,6 +1,6 @@
 # 基于crontab，使用python执行自动git实现博客的自动更新
 
-1.准备python文件
+## 1.准备python文件
 
 ```python
 from calendar import c
@@ -38,9 +38,9 @@ else:
     print(ii)
 ```
 
-2.启动cron服务
+## 2.启动cron服务
 
-3.使用crontab -e 编辑定时任务
+## 3.使用crontab -e 编辑定时任务
 
 在文件尾部添加
 
@@ -50,13 +50,13 @@ else:
 
 - 第一次使用会让你选择使用的编辑器
 
-4.重启cron service
+## 4.重启cron service
 
 ```sh
 sudo service cron restart  
 ```
 
-5.通过查看日志了解程序运行情况
+## 5.通过查看日志了解程序运行情况
 
 ```sh
 vim <重定向日志路径>

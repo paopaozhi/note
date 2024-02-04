@@ -17,4 +17,4 @@
 
 ## SPI时序图
 
-![](./stm32_SPI.assets/image-20221014135643963.png)
+![](./figures/image-20221014135643963.png)
