@@ -1,3 +1,4 @@
 ohos-applied-note
 *.pdf
 site
+local_build.ps1

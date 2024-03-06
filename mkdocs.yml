@@ -11,12 +11,10 @@ nav:
   - 主页: index.md
   - 嵌入式: 嵌入式/
   - Liunx: liunx/
-  - Python: python/
-  - Luckfox-Pico: Luckfox-Pico/
   - 机器学习: 机器学习/
-  - 电子技术: 电子技术/
-  - Go: go/
+  - 计算机学习: 计算机学习/
   - English: english/
+  - 杂项: chore/
 
 theme:
   name: material
