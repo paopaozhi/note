@@ -77,6 +77,8 @@ extra:
 
 plugins:
   - search
+  # 
+  - callouts
   - section-index
   - literate-nav:
       implicit_index: true
