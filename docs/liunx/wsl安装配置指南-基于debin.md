@@ -12,9 +12,51 @@ apt install build-essential
 
 ### 安装docker
 
-参考连接：[docker-ce | 镜像站使用帮助 | 清华大学开源软件镜像站 | Tsinghua Open Source Mirror](https://mirrors.tuna.tsinghua.edu.cn/help/docker-ce/)
+#### 自动安装方式
+
+Docker 提供了一个自动配置与安装的脚本，支持 Debian、RHEL、SUSE 系列及衍生系统的安装。
+
+以下内容假定
+
+- 您为 root 用户，或有 sudo 权限，或知道 root 密码；
+- 您系统上有 curl 或 wget
+
+```shell
+export DOWNLOAD_URL="https://mirrors.bfsu.edu.cn/docker-ce"
+# 如您使用 curl
+curl -fsSL https://get.docker.com/ | sh
+# 如您使用 wget
+wget -O- https://get.docker.com/ | sh
+```
 
 ## 环境配置
+
+### 配置代理
+
+配置`.wslconfig`文件
+
+> [!note]
+>
+> 文件在windows用户目录中
+
+```toml
+# Settings apply across all Linux distros running on WSL 2
+[wsl2]
+# Limits VM memory to use no more than 4 GB, this can be set as whole numbers using GB or MB
+memory=4GB
+# 要向 WSL 2 VM 添加的交换空间量，0 表示无交换文件。
+swap=8GB
+# 强制 WSL 使用 Windows 的 HTTP 代理信息
+autoProxy=true
+# 如果值为 mirrored，则会启用镜像网络模式。 默认或无法识别的字符串会生成 NAT 网络
+networkingMode=mirrored
+# 更改将 DNS 请求从 WSL 代理到 Windows 的方式
+dnsTunneling=true
+# 如果设置为 true，则 Windows 防火墙规则以及特定于 Hyper-V 流量的规则可以筛选 WSL 网络流量。
+firewall=true
+```
+
+配置完后，宿主机中打开代理后，可以镜像到`wsl`(值得注意的是，)
 
 ### 配置debian终端命令补全
 
@@ -57,3 +99,33 @@ appendWindowsPath=false
 # 需要替换为vscode的安装路径
 ln -s /mnt/c/Users/paopaozhi/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code /bin/code
 ```
+
+## 管理系统
+
+### apt包管理器
+
+#### 安装包
+
+```shell
+apt install <packName>
+```
+
+#### 卸载包
+
+```shell
+apt remove <packName>
+```
+
+#### 清理无用的依赖包
+
+```shell
+# 删除为了满足依赖而安装的，但现在不再需要的软件包（包括已安装包），保留配置文件；
+# 高能警告：慎用本命令！！！
+# 它会在你不知情的情况下，一股脑删除很多“它认为”你不再使用的软件；
+apt-get autoclean
+# 删除为了满足某些依赖安装的，但现在不再需要的软件包；
+# apt的底层包是dpkg, 而dpkg安装软件包时, 会将*.deb文件放在/var/cache/apt/archives/中；
+# 因此本命令会删除该目录下已经过期的deb；
+apt-get autoremove
+```
+
