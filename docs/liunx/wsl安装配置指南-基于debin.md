@@ -2,34 +2,19 @@
 
 ## 安装Debian
 
-## 基本软件安装
-
-### 安装C环境
-
-```bash
-apt install build-essential
+```shell
+ # 配置wsl子系统，并下载debian系统
+wsl --install -d Debain
 ```
 
-### 安装docker
+### 开启systemD支持
 
-#### 自动安装方式
-
-Docker 提供了一个自动配置与安装的脚本，支持 Debian、RHEL、SUSE 系列及衍生系统的安装。
-
-以下内容假定
-
-- 您为 root 用户，或有 sudo 权限，或知道 root 密码；
-- 您系统上有 curl 或 wget
+配置`wsl.conf`开启systemD支持
 
 ```shell
-export DOWNLOAD_URL="https://mirrors.bfsu.edu.cn/docker-ce"
-# 如您使用 curl
-curl -fsSL https://get.docker.com/ | sh
-# 如您使用 wget
-wget -O- https://get.docker.com/ | sh
+[boot]
+systemd=true
 ```
-
-## 环境配置
 
 ### 配置代理
 
@@ -100,6 +85,55 @@ appendWindowsPath=false
 ln -s /mnt/c/Users/paopaozhi/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code /bin/code
 ```
 
+## 基本软件安装
+
+### 安装C环境
+
+```bash
+apt install build-essential
+```
+
+### 安装docker
+
+#### 自动安装方式
+
+Docker 提供了一个自动配置与安装的脚本，支持 Debian、RHEL、SUSE 系列及衍生系统的安装。
+
+以下内容假定
+
+- 您为 root 用户，或有 sudo 权限，或知道 root 密码；
+- 您系统上有 curl 或 wget
+
+```shell
+export DOWNLOAD_URL="https://mirrors.bfsu.edu.cn/docker-ce"
+# 如您使用 curl
+curl -fsSL https://get.docker.com/ | sh
+# 如您使用 wget
+wget -O- https://get.docker.com/ | sh
+```
+
+#### 启动docker加入开机自启
+
+```shell
+sudo systemctl enable docker
+sudo systemctl start docker
+```
+
+#### 将当前用户加入docker组
+
+通过将用户加入docker组的方式，可以不用加`sudo`运行`docker`命令
+
+```shell
+# 添加docker用户组，一般已存在，不需要执行
+sudo groupadd docker
+# 将登陆用户加入到docker用户组中
+sudo gpasswd -a $USER docker
+# 更新用户组
+newgrp docker
+# 测试docker命令是否可以使用sudo正常使用
+docker version
+```
+
 ## 管理系统
 
 ### apt包管理器
@@ -128,4 +162,11 @@ apt-get autoclean
 # 因此本命令会删除该目录下已经过期的deb；
 apt-get autoremove
 ```
+
+## 参考文献
+
+1. [适用于 Linux 的 Windows 子系统文档 | Microsoft Learn](https://learn.microsoft.com/zh-cn/windows/wsl/)
+
+2. [docker-ce | 镜像站使用帮助 | 北京外国语大学开源软件镜像站 | BFSU Open Source Mirror](https://mirrors.bfsu.edu.cn/help/docker-ce/)
+3. [Docker Docs](https://docs.docker.com/)
 

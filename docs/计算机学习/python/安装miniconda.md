@@ -11,6 +11,7 @@ set-executionpolicy remotesigned
 ## 3. 初始化conda
 
 ```shell
+conda init --system --all
 conda init powershell
 ```
 
