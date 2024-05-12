@@ -134,6 +134,36 @@ newgrp docker
 docker version
 ```
 
+执行以下命令，打开 `/etc/docker/daemon.json` 配置文件。
+
+#### 配置腾讯云 Docker 镜像源加速镜像下载
+
+```bash
+vim /etc/docker/daemon.json
+```
+
+1.2 按 **i** 切换至编辑模式，添加以下内容，并保存。
+
+```bash
+{
+   "registry-mirrors": [
+   "https://mirror.ccs.tencentyun.com"
+  ]
+}
+```
+
+1.3 执行以下命令，重启 Docker 即可。示例命令以 CentOS 7 为例。
+
+```bash
+sudo systemctl restart docker
+```
+
+1.4. 重启 Docker 后，并运行以下命令来查看当前 Docker 的配置。如镜像源配置成功，则输出的内容中会包含下图所示的部分。
+
+**说明：**
+
+您也可以直接执行`docker pull <镜像名>` 命令来拉取镜像，如能成功拉取，则也能够说明配置成功。
+
 ## 管理系统
 
 ### apt包管理器

@@ -14,8 +14,21 @@ mypackage
     └── ... (other Python files)
 ```
 
+## 打包pypi包
+
+```shell
+python -m build
+```
+
 ## 开发中安装包到本地
 
 ```shell
 pip install --editable .
 ```
+
+## 将包上传到 PyPI
+
+```
+twine upload dist/*
+```
+

@@ -9,7 +9,7 @@ copyright: Copyright &copy; 2024 paopaozhi
 
 nav:
   - 主页: index.md
-  - 嵌入式: 嵌入式/
+  - 嵌入式: embedded/
   - Liunx: liunx/
   - 计算机学习: 计算机学习/
   - 机器学习: 机器学习/

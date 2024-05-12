@@ -2,7 +2,7 @@
 
 ## 1. 串口只能接收2个字符
 
-问题描述：
+### 问题描述
 
 ```c
 static uint8_t rx_buf[20];
@@ -58,11 +58,11 @@ void UartCallback(void) {
 }
 ```
 
-问题分析：
+### 问题分析
 
 1. 可能在中断中使用了`printf`
 
-解决方案：
+### 解决方案
 
 去掉接收中断中的`printf`
 
@@ -80,3 +80,20 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 }
 ```
 
+## 2. openOCD调试STMF4系列无法进入调试
+
+### 问题描述
+
+### 问题分析
+
+### 解决方案
+
+```c
+// 先将时钟源选择为内部时钟
+RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_SYSCLK;
+RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
+if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
+{
+    Error_Handler();
+}
+```
