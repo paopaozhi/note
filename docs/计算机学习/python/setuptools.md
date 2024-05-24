@@ -32,3 +32,34 @@ pip install --editable .
 twine upload dist/*
 ```
 
+## GitHub action 上传
+
+1. 登录到自己的pypi项目中，将Github仓库加入到可信的发布中
+
+2. 以下是上传的示例`yaml`文件
+
+```yaml
+name: Deploy release
+on:
+  push:
+    tags:
+      - '*'
+jobs:
+  pypi:
+    permissions:
+      id-token: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+      - name: Install dependencies
+        run: pip install -U build
+      - name: Build package
+        run: python -m build
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+```
+
