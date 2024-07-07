@@ -123,6 +123,56 @@ cp out/bearpi_hm_micro/bearpi_hm_micro/rootfs_vfat.img applications/BearPi/BearP
 cp out/bearpi_hm_micro/bearpi_hm_micro/userfs_vfat.img applications/BearPi/BearPi-HM_Micro/tools/download_img/kernel/
 ```
 
+为了方便编译使用`python`编写了一个简单的编译脚本，以下是脚本内容：
+
+```python
+# python version >= 3.9
+# 依赖typer库: pip install typer
+import typer
+import subprocess
+import sys
+
+app = typer.Typer()
+
+
+@app.command()
+def copy_image():
+    """
+    cp out/bearpi_hm_micro/bearpi_hm_micro/OHOS_Image.stm32 applications/BearPi/BearPi-HM_Micro/tools/download_img/kernel/
+    cp out/bearpi_hm_micro/bearpi_hm_micro/rootfs_vfat.img applications/BearPi/BearPi-HM_Micro/tools/download_img/kernel/
+    cp out/bearpi_hm_micro/bearpi_hm_micro/userfs_vfat.img applications/BearPi/BearPi-HM_Micro/tools/download_img/kernel/
+    """
+    out_image = ["OHOS_Image.stm32", "rootfs_vfat.img", "userfs_vfat.img"]
+    out_path = "out/bearpi_hm_micro/bearpi_hm_micro/"
+    target_path = "applications/BearPi/BearPi-HM_Micro/tools/download_img/kernel/"
+
+    for i in out_image:
+        subprocess.run(["cp", out_path + i, target_path])
+
+
+@app.command()
+def build():
+    # hb build -t notest --tee -f
+    result = subprocess.Popen(
+        ["hb", "build", "-t", "notest", "--tee", "-f"],
+        stdout=subprocess.PIPE,
+    )
+    for line in iter(result.stdout.readline, b""):
+        sys.stdout.write(line.decode("utf-8"))
+        sys.stdout.flush()
+
+    result.wait()
+
+    # print(result.returncode)
+    if result.returncode == 0:
+        copy_image()
+
+
+if __name__ == "__main__":
+    app()
+
+```
+
 ## 烧录固件
 
 需要使用`STM32CubeProgrammer`，软件链接：
