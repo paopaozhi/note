@@ -164,6 +164,19 @@ sudo systemctl restart docker
 
 您也可以直接执行`docker pull <镜像名>` 命令来拉取镜像，如能成功拉取，则也能够说明配置成功。
 
+#### 添加用户组
+
+```sh
+# 添加docker用户组，一般已存在，不需要执行
+sudo groupadd docker
+
+# 将登陆用户加入到docker用户组中
+sudo gpasswd -a $USER docker
+
+# 更新用户组
+newgrp docker
+```
+
 ## 管理系统
 
 ### apt包管理器

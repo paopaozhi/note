@@ -1,0 +1,70 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.嵌入式": {
+    "message": "嵌入式",
+    "description": "The label for category 嵌入式 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.[KiCad ](https://gitee.com/kicad-eda)学习笔记": {
+    "message": "[KiCad ](https://gitee.com/kicad-eda)学习笔记",
+    "description": "The label for category [KiCad ](https://gitee.com/kicad-eda)学习笔记 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Luckfox-Pico": {
+    "message": "Luckfox-Pico",
+    "description": "The label for category Luckfox-Pico in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.ohos 设备开发": {
+    "message": "ohos 设备开发",
+    "description": "The label for category ohos 设备开发 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.RTOS-2应用": {
+    "message": "RTOS-2应用",
+    "description": "The label for category RTOS-2应用 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.STM32": {
+    "message": "STM32",
+    "description": "The label for category STM32 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Linux": {
+    "message": "Linux",
+    "description": "The label for category Linux in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.apline 学习": {
+    "message": "apline 学习",
+    "description": "The label for category apline 学习 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.计算机学习": {
+    "message": "计算机学习",
+    "description": "The label for category 计算机学习 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.go 学习笔记": {
+    "message": "go 学习笔记",
+    "description": "The label for category go 学习笔记 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.index": {
+    "message": "index",
+    "description": "The label for category index in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.rCore学习": {
+    "message": "rCore学习",
+    "description": "The label for category rCore学习 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.机器学习": {
+    "message": "机器学习",
+    "description": "The label for category 机器学习 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.English": {
+    "message": "English",
+    "description": "The label for category English in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.我的世界": {
+    "message": "我的世界",
+    "description": "The label for category 我的世界 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.杂项": {
+    "message": "杂项",
+    "description": "The label for category 杂项 in sidebar tutorialSidebar"
+  }
+}

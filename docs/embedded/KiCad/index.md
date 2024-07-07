@@ -1,4 +1,4 @@
-# [KiCad ](https://gitee.com/kicad-eda)学习笔记
+# KiCad学习笔记
 
 ## 简介
 

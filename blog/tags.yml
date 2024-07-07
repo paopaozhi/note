@@ -1,0 +1,20 @@
+facebook:
+  label: Facebook
+  permalink: /facebook
+  description: Facebook tag description
+hello:
+  label: Hello
+  permalink: /hello
+  description: Hello tag description
+docusaurus:
+  label: Docusaurus
+  permalink: /docusaurus
+  description: Docusaurus tag description
+em:
+  label: 嵌入式
+  permalink: /embedded
+  description: 嵌入式标签描述
+python:
+  label: Python
+  permalink: /python
+  description: python tag description

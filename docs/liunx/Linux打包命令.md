@@ -41,41 +41,41 @@ tar [选项] 源文件或目录
 
 - 打包
 
-```sh
-tar -cvf <文件名>.tar <文件名>
-```
+    ```sh
+    tar -cvf <文件名>.tar <文件名>
+    ```
 
 - 解包
 
-```sh
-tar -xvf <文件名>.tar
-```
+    ```sh
+    tar -xvf <文件名>.tar
+    ```
 
 #### .tar.gz文件
 
 - 打包
 
-```bash
-tar -zcvf <文件名>.tar.gz <文件名>
-```
+    ```bash
+    tar -zcvf <文件名>.tar.gz <文件名>
+    ```
 
 - 解包
 
-```bash
-tar -zxvf <文件名>.tar.gz
-```
+    ```bash
+    tar -zxvf <文件名>.tar.gz
+    ```
 
 #### .tar.bz2文件
 
 - 打包
 
-```bash
-tar -jcvf <文件名>.tar.bz2 <文件名>
-```
+    ```bash
+    tar -jcvf <文件名>.tar.bz2 <文件名>
+    ```
 
 - 解包
 
-```bash
-tar -jxvf <文件名>.tar.bz2
-```
+    ```bash
+    tar -jxvf <文件名>.tar.bz2
+    ```
 

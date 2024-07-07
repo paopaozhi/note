@@ -1,5 +1,5 @@
 # markdownlint 报错集锦
-
+<!--
 ## MD001 - 标题逐级递增
 
 `MD001` - [Heading levels should only increment by one level at a time](https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md001---heading-levels-should-only-increment-by-one-level-at-a-time)
@@ -1518,4 +1518,4 @@
 
 参考链接
 
-1. [Markdown 语法规范：markdownlint - Newverse & Wiki](https://www.newverse.wiki/senses/markdownlint/#MD042)
+1. [Markdown 语法规范：markdownlint - Newverse & Wiki](https://www.newverse.wiki/senses/markdownlint/#MD042) -->

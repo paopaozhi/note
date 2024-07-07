@@ -2,9 +2,9 @@
 
 **FOC（Field-Oriented Control）**，直译是磁场定向控制，也被称作矢量控制**（VC，Vector Control）**，是目前无刷直流电机（BLDC）和永磁同步电机（PMSM）高效控制的最优方法之一。FOC旨在通过精确地控制磁场大小与方向，使得电机的运动转矩平稳、噪声小、效率高，并且具有高速的动态响应。
 
-### 驱动电路的实现
+## 驱动电路的实现
 
-
+暂代
 
 ## 理论基础
 
@@ -23,32 +23,8 @@
 ### 克拉克变换(Clark变换)
 
 $$
-\begin{bmatrix} 
-
- I_{\alpha }  \\
-
- 1_{\beta }
-
-\end{bmatrix} = \begin{bmatrix}
-
- 1 & -\frac{1}{2} & -\frac{1}{2}\\
-
- 0 & \frac{\sqrt{3}}{2}  & -\frac{\sqrt{3}}{2}
-
-\end{bmatrix} 
-
-\begin{bmatrix}
-
- I_{a}\\
-
- I_{b} \\
-
- I_{c}
-
-\end{bmatrix}
+\begin{bmatrix}    I_{\alpha }  \\    1_{\beta }\end{bmatrix} = \begin{bmatrix} 1 & -\frac{1}{2} & -\frac{1}{2} \\ 0 & \frac{\sqrt{3}}{2}  & -\frac{\sqrt{3}}{2}\end{bmatrix}\begin{bmatrix} I_{a}\\ I_{b} \\ I_{c}\end{bmatrix}
 $$
-
-
 
 ## 名词解析
 

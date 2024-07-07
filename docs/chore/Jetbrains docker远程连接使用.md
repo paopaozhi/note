@@ -1,12 +1,5 @@
 # Jetbrains docker远程连接使用
 
-## 目录
-
--   [1.保证可以正常使用docker](#1保证可以正常使用docker)
--   [2. 编辑docker配置文件](#2-编辑docker配置文件)
--   [3. 执行一下指令重启docker服务](#3-执行一下指令重启docker服务)
--   [4. 配置IDE中docker](#4-配置IDE中docker)
-
 ## 1.保证可以正常使用docker
 
 ## 2. 编辑docker配置文件
@@ -39,4 +32,5 @@ curl http://127.0.0.1:2375/info     #测试远程链接端口是否开启成功
 
 ## 4. 配置IDE中docker
 
-![](./figures/image_Nzids9fCIC.png)
+![image_Nzids9fCIC](./figures/image_Nzids9fCIC.png)
+
