@@ -2,7 +2,7 @@
 
 ## 安装wsl
 
-```
+```shell
 wsl install Ubuntu-24.04
 ```
 
@@ -33,7 +33,7 @@ chmod +x Miniconda3-latest-Linux-x86_64.sh
 
 ### 安装编译工具
 
-```
+```shell
 pip install ohos-build==0.4.3
 ```
 
@@ -41,11 +41,11 @@ pip install ohos-build==0.4.3
 
 1. 建立目录
 
-    ```shell
-    mkdir ~/tools 
-    ```
+   ```shell
+   mkdir ~/tools 
+   ```
 
-2. 下载mkimage.stm32工具，并复制到/home/bearpi/tools/目录下
+2. 下载mkimage.stm32工具，并复制到`/home/bearpi/tools/`目录下
 
    mkimage.stm32下载地址: [https://pan.baidu.com/s/1y6ev83VV7mk7RMigdBDMmw?pwd=1234](https://gitee.com/link?target=https%3A%2F%2Fpan.baidu.com%2Fs%2F1y6ev83VV7mk7RMigdBDMmw%3Fpwd%3D1234) 提取码：1234
 

@@ -76,76 +76,76 @@
 
 2. 接下来，实现驱动的初始化函数
 
-  根据函数的原型定义：`int32_t (*Bind)(struct HdfDeviceObject *deviceObject);`
+    根据函数的原型定义：`int32_t (*Bind)(struct HdfDeviceObject *deviceObject);`
 
-  在这个函数中，我们需要做这几件事：
+    在这个函数中，我们需要做这几件事：
 
-  - 获取GPIO编号值
-  - 配置GPIO为输出
+    - 获取GPIO编号值
+    - 配置GPIO为输出
 
-   ```c
-   // 定义驱动参数
-   struct Stm32Mp1ILed {
-       uint32_t gpioNum;
-   };
+    ```c
+    // 定义驱动参数
+    struct Stm32Mp1ILed {
+        uint32_t gpioNum;
+    };
   
-  /**
-   * @brief 读取驱动私有配置
-   *
-   * @param led
-   * @param node
-   * @return int32_t
-   */
-  static int32_t Stm32LedReadDrs(struct Stm32Mp1ILed *led, const struct DeviceResourceNode *node)
-  {
-      int32_t ret;
-      struct DeviceResourceIface *drsOps = NULL;
+    /**
+    * @brief 读取驱动私有配置
+    *
+    * @param led
+    * @param node
+    * @return int32_t
+    */
+    static int32_t Stm32LedReadDrs(struct Stm32Mp1ILed *led, const struct DeviceResourceNode *node)
+    {
+        int32_t ret;
+        struct DeviceResourceIface *drsOps = NULL;
+    
+        drsOps = DeviceResourceGetIfaceInstance(HDF_CONFIG_SOURCE);
+        if (drsOps == NULL || drsOps->GetUint32 == NULL) {
+            HDF_LOGE("%s: invalid drs ops!", __func__);
+            return HDF_FAILURE;
+        }
+        /* 读取led.hcs里面led_gpio_num的值 */
+        ret = drsOps->GetUint32(node, "led_gpio_num", &led->gpioNum, 0);
+        if (ret != HDF_SUCCESS) {
+            HDF_LOGE("%s: read led gpio num fail!", __func__);
+            return ret;
+        }
+        return HDF_SUCCESS;
+    }
   
-      drsOps = DeviceResourceGetIfaceInstance(HDF_CONFIG_SOURCE);
-      if (drsOps == NULL || drsOps->GetUint32 == NULL) {
-          HDF_LOGE("%s: invalid drs ops!", __func__);
-          return HDF_FAILURE;
-      }
-      /* 读取led.hcs里面led_gpio_num的值 */
-      ret = drsOps->GetUint32(node, "led_gpio_num", &led->gpioNum, 0);
-      if (ret != HDF_SUCCESS) {
-          HDF_LOGE("%s: read led gpio num fail!", __func__);
-          return ret;
-      }
-      return HDF_SUCCESS;
-  }
-  
-   // 驱动自身业务初始的接口
-   int32_t HdfLedDriverInit(struct HdfDeviceObject *device)
-   {
-       struct Stm32Mp1ILed *led = &g_Stm32Mp1ILed;
-       int32_t ret;
-  
-       if (device == NULL || device->property == NULL) {
-           HDF_LOGE("%s: device or property NULL!", __func__);
-           return HDF_ERR_INVALID_OBJECT;
-       }
-       /* 读取hcs私有属性值 */
-       ret = Stm32LedReadDrs(led, device->property);
-       if (ret != HDF_SUCCESS) {
-           HDF_LOGE("%s: get led device resource fail:%d", __func__, ret);
-           return ret;
-       }
-       /* 将GPIO管脚配置为输出 */
-       ret = GpioSetDir(led->gpioNum, GPIO_DIR_OUT);
-       if (ret != 0)
-       {
-           HDF_LOGE("GpioSerDir: failed, ret %d\n", ret);
-           return ret;
-       }
-       HDF_LOGD("Led driver Init success");
-       return HDF_SUCCESS;
-   }
-   ```
+    // 驱动自身业务初始的接口
+    int32_t HdfLedDriverInit(struct HdfDeviceObject *device)
+    {
+        struct Stm32Mp1ILed *led = &g_Stm32Mp1ILed;
+        int32_t ret;
+    
+        if (device == NULL || device->property == NULL) {
+            HDF_LOGE("%s: device or property NULL!", __func__);
+            return HDF_ERR_INVALID_OBJECT;
+        }
+        /* 读取hcs私有属性值 */
+        ret = Stm32LedReadDrs(led, device->property);
+        if (ret != HDF_SUCCESS) {
+            HDF_LOGE("%s: get led device resource fail:%d", __func__, ret);
+            return ret;
+        }
+        /* 将GPIO管脚配置为输出 */
+        ret = GpioSetDir(led->gpioNum, GPIO_DIR_OUT);
+        if (ret != 0)
+        {
+            HDF_LOGE("GpioSerDir: failed, ret %d\n", ret);
+            return ret;
+        }
+        HDF_LOGD("Led driver Init success");
+        return HDF_SUCCESS;
+    }
+    ```
 
 3. 接下来，编写驱动释放时的钩子函数
 
-	由于LED并没有使用动态的资源，所以，只是打印了日志
+    由于LED并没有使用动态的资源，所以，只是打印了日志
 
     ```c
     // 驱动资源释放的接口
@@ -163,125 +163,125 @@
 
 4. 接下来，编写服务绑定钩子函数
 
-   用于绑定驱动的服务，对于LED驱动来说，提供接口使上层应用
+    用于绑定驱动的服务，对于LED驱动来说，提供接口使上层应用
    
-   ```c
-   /**
-    * @brief Dispatch是用来处理用户态发下来的消息
-    * 
-    * @param client 
-    * @param cmdCode 
-    * @param data 
-    * @param reply 
-    * @return int32_t 
-    */
-   int32_t LedDriverDispatch(struct HdfDeviceIoClient *client, int cmdCode, struct HdfSBuf *data, struct HdfSBuf *reply)
-   {
-       uint8_t contrl;
-       HDF_LOGI("Led driver dispatch");
-       if (client == NULL || client->device == NULL)
-       {
-           HDF_LOGE("Led driver device is NULL");
-           return HDF_ERR_INVALID_OBJECT;
-       }
+    ```c
+    /**
+        * @brief Dispatch是用来处理用户态发下来的消息
+        * 
+        * @param client 
+        * @param cmdCode 
+        * @param data 
+        * @param reply 
+        * @return int32_t 
+        */
+    int32_t LedDriverDispatch(struct HdfDeviceIoClient *client, int cmdCode, struct HdfSBuf *data, struct HdfSBuf *reply)
+    {
+        uint8_t contrl;
+        HDF_LOGI("Led driver dispatch");
+        if (client == NULL || client->device == NULL)
+        {
+            HDF_LOGE("Led driver device is NULL");
+            return HDF_ERR_INVALID_OBJECT;
+        }
+    
+        switch (cmdCode)
+        {
+        /* 接收到用户态发来的LED_WRITE_READ命令 */
+        case LED_WRITE_READ:
+            /* 读取data里的数据，赋值给contrl */
+            HdfSbufReadUint8(data,&contrl);                  
+            switch (contrl)
+            {
+            /* 开灯 */
+            case LED_ON:                                            
+                GpioWrite(g_Stm32Mp1ILed.gpioNum, GPIO_VAL_LOW);
+                status = 1;
+                break;
+            /* 关灯 */
+            case LED_OFF:                                           
+                GpioWrite(g_Stm32Mp1ILed.gpioNum, GPIO_VAL_HIGH);
+                status = 0;
+                break;
+            /* 状态翻转 */
+            case LED_TOGGLE:
+                if(status == 0)
+                {
+                    GpioWrite(g_Stm32Mp1ILed.gpioNum, GPIO_VAL_LOW);
+                    status = 1;
+                }
+                else
+                {
+                    GpioWrite(g_Stm32Mp1ILed.gpioNum, GPIO_VAL_HIGH);
+                    status = 0;
+                }                                        
+                break;
+            default:
+                break;
+            }
+            /* 把LED的状态值写入reply, 可被带至用户程序 */
+            if (!HdfSbufWriteInt32(reply, status))                
+            {
+                HDF_LOGE("replay is fail");
+                return HDF_FAILURE;
+            }
+            break;
+        default:
+            break;
+        }
+        return HDF_SUCCESS;
+    }
+    
+    //驱动对外提供的服务能力，将相关的服务接口绑定到HDF框架
+    int32_t HdfLedDriverBind(struct HdfDeviceObject *deviceObject)
+    {
+        if (deviceObject == NULL)
+        {
+            HDF_LOGE("Led driver bind failed!");
+            return HDF_ERR_INVALID_OBJECT;
+        }
+        static struct IDeviceIoService ledDriver = {
+            // 绑定的处理函数
+            .Dispatch = LedDriverDispatch,
+        };
+        deviceObject->service = (struct IDeviceIoService *)(&ledDriver);
+        HDF_LOGD("Led driver bind success");
+        return HDF_SUCCESS;
+    }
+    ```
    
-       switch (cmdCode)
-       {
-       /* 接收到用户态发来的LED_WRITE_READ命令 */
-       case LED_WRITE_READ:
-           /* 读取data里的数据，赋值给contrl */
-           HdfSbufReadUint8(data,&contrl);                  
-           switch (contrl)
-           {
-           /* 开灯 */
-           case LED_ON:                                            
-               GpioWrite(g_Stm32Mp1ILed.gpioNum, GPIO_VAL_LOW);
-               status = 1;
-               break;
-           /* 关灯 */
-           case LED_OFF:                                           
-               GpioWrite(g_Stm32Mp1ILed.gpioNum, GPIO_VAL_HIGH);
-               status = 0;
-               break;
-           /* 状态翻转 */
-           case LED_TOGGLE:
-               if(status == 0)
-               {
-                   GpioWrite(g_Stm32Mp1ILed.gpioNum, GPIO_VAL_LOW);
-                   status = 1;
-               }
-               else
-               {
-                   GpioWrite(g_Stm32Mp1ILed.gpioNum, GPIO_VAL_HIGH);
-                   status = 0;
-               }                                        
-               break;
-           default:
-               break;
-           }
-           /* 把LED的状态值写入reply, 可被带至用户程序 */
-           if (!HdfSbufWriteInt32(reply, status))                
-           {
-               HDF_LOGE("replay is fail");
-               return HDF_FAILURE;
-           }
-           break;
-       default:
-           break;
-       }
-       return HDF_SUCCESS;
-   }
+    到这里，我们就已经完成了LED驱动代码的编写
    
-   //驱动对外提供的服务能力，将相关的服务接口绑定到HDF框架
-   int32_t HdfLedDriverBind(struct HdfDeviceObject *deviceObject)
-   {
-       if (deviceObject == NULL)
-       {
-           HDF_LOGE("Led driver bind failed!");
-           return HDF_ERR_INVALID_OBJECT;
-       }
-       static struct IDeviceIoService ledDriver = {
-           // 绑定的处理函数
-           .Dispatch = LedDriverDispatch,
-       };
-       deviceObject->service = (struct IDeviceIoService *)(&ledDriver);
-       HDF_LOGD("Led driver bind success");
-       return HDF_SUCCESS;
-   }
-   ```
+    接下来，我们将我们写代码加入编译
    
-   到这里，我们就已经完成了LED驱动代码的编写
+    ```
+    # led/BUILD.gn
+    import("//drivers/adapter/khdf/liteos/hdf.gni")
+    
+    hdf_driver("hdf_led") {
+        sources = [
+        "led.c",
+        ]
+    }
+    ```
    
-   接下来，我们将我们写代码加入编译
-   
-   ```
-   # led/BUILD.gn
-   import("//drivers/adapter/khdf/liteos/hdf.gni")
-   
-   hdf_driver("hdf_led") {
-       sources = [
-       "led.c",
-       ]
-   }
-   ```
-   
-   ```gn
-   # BUILD.gn
-   group("drivers") {
-     deps = [
-       "adc",
-       "pwm",
-       "uart",
-       "iwdg",
-       "i2c",
-       "gpio",
-       "e53_driver",
-       "stm32mp1xx_hal",
-       # my driver
-       "led",
-     ]
-   }
-   ```
+    ```gn
+    # BUILD.gn
+    group("drivers") {
+        deps = [
+        "adc",
+        "pwm",
+        "uart",
+        "iwdg",
+        "i2c",
+        "gpio",
+        "e53_driver",
+        "stm32mp1xx_hal",
+        # my driver
+        "led",
+        ]
+    }
+    ```
 
 ## 驱动配置文件
 
