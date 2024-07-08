@@ -66,5 +66,33 @@
   "sidebar.tutorialSidebar.category.杂项": {
     "message": "杂项",
     "description": "The label for category 杂项 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.ohos": {
+    "message": "ohos",
+    "description": "The label for category ohos in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.KiCad": {
+    "message": "KiCad",
+    "description": "The label for category KiCad in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.CMSIS": {
+    "message": "CMSIS",
+    "description": "The label for category CMSIS in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Alpine Linux": {
+    "message": "Alpine Linux",
+    "description": "The label for category Alpine Linux in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.go": {
+    "message": "go",
+    "description": "The label for category go in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.python": {
+    "message": "python",
+    "description": "The label for category python in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.rust": {
+    "message": "rust",
+    "description": "The label for category rust in sidebar tutorialSidebar"
   }
 }
