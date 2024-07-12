@@ -144,13 +144,19 @@ vim /etc/docker/daemon.json
 
 1.2 按 **i** 切换至编辑模式，添加以下内容，并保存。
 
-```bash
+> 由于镜像站的的问题，导致部分镜像站已经失效了，所以，给出自己测试可以使用的镜站。
+
+```json
 {
-   "registry-mirrors": [
-   "https://mirror.ccs.tencentyun.com"
+  "registry-mirrors": [
+    "https://docker.m.daocloud.io",
+    "https://dockerproxy.com",
+    "https://docker.mirrors.ustc.edu.cn",
+    "https://docker.nju.edu.cn"
   ]
 }
 ```
+
 
 1.3 执行以下命令，重启 Docker 即可。示例命令以 CentOS 7 为例。
 
