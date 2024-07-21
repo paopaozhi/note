@@ -19,14 +19,13 @@ Balena Etcher 是一个跨平台且，用户界面友好的镜像文件烧写工
 
 2. 下载RaspberryPi OS
 
-   下载[RaspberryPi OS Lite ](https://mirrors.bfsu.edu.cn/raspberry-pi-os-images/raspios_arm64/images/raspios_arm64-2024-03-15/2024-03-15-raspios-bookworm-arm64.img.xz)到本地
+   下载[RaspberryPi OS](https://mirrors.bfsu.edu.cn/raspberry-pi-os-images/raspios_arm64/images/raspios_arm64-2024-03-15/2024-03-15-raspios-bookworm-arm64.img.xz)到本地
 
 3. 打开Balena Etcher烧写镜像
 
 4. 将SD卡插入MicroSD 插槽内
 
    需要注意，SD卡的朝向
-
 
 ## 配置网络
 
@@ -48,27 +47,7 @@ Balena Etcher 是一个跨平台且，用户界面友好的镜像文件烧写工
 
 ![image-20240506213909856](figures/image-20240506213909856.png)
 
-## 更换软件源
-
-
-
-编辑 `/etc/apt/sources.list.d/raspi.list` 文件。
-
-```
-deb https://mirrors.bfsu.edu.cn/raspberrypi/ bookworm main
-```
-
-## 配置ssh连接
-
-
-
-## 风扇调速
-
-[Rockchip平台cpu散热风扇随温度自动调速的配置方法_pwm-fan-CSDN博客](https://blog.csdn.net/weixin_43245753/article/details/126227479)
-
-## 安装docker
-
-## 配制ap热点
+### 配制ap热点
 
 ```text
 interface=wlan0
@@ -86,6 +65,22 @@ wpa_key_mgmt=WPA-PSK
 wpa_pairwise=TKIP
 rsn_pairwise=CCMP
 ```
+
+## 更换软件源
+
+编辑 `/etc/apt/sources.list.d/raspi.list` 文件。
+
+```
+deb https://mirrors.bfsu.edu.cn/raspberrypi/ bookworm main
+```
+
+## 配置ssh连接
+
+## 风扇调速
+
+[Rockchip平台cpu散热风扇随温度自动调速的配置方法_pwm-fan-CSDN博客](https://blog.csdn.net/weixin_43245753/article/details/126227479)
+
+## 安装docker
 
 ## 搭建第一个网站
 
