@@ -29,11 +29,19 @@ Balena Etcher 是一个跨平台且，用户界面友好的镜像文件烧写工
 
 ## 配置网络
 
+### 固定ip地址
+
+```shell
+auto eth0
+iface eth0 inet static
+address 192.168.137.36
+netmask 255.255.255.0
+gateway 192.168.137.1
+```
+
 ### WiFi配置
 
 配置网络路由表
-
-
 
 ### 有限网络-路由器
 
@@ -66,28 +74,82 @@ wpa_pairwise=TKIP
 rsn_pairwise=CCMP
 ```
 
-## 更换软件源
+## 更换软件镜像源
+
+### debian软件源
+
+> [北外开源](https://mirrors.bfsu.edu.cn/help/debian/)
+
+编辑 `/etc/apt/sources.list` 文件。
+
+```shell
+# 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
+deb https://mirrors.bfsu.edu.cn/debian/ bookworm main contrib non-free non-free-firmware
+# deb-src https://mirrors.bfsu.edu.cn/debian/ bookworm main contrib non-free non-free-firmware
+
+deb https://mirrors.bfsu.edu.cn/debian/ bookworm-updates main contrib non-free non-free-firmware
+# deb-src https://mirrors.bfsu.edu.cn/debian/ bookworm-updates main contrib non-free non-free-firmware
+
+deb https://mirrors.bfsu.edu.cn/debian/ bookworm-backports main contrib non-free non-free-firmware
+# deb-src https://mirrors.bfsu.edu.cn/debian/ bookworm-backports main contrib non-free non-free-firmware
+
+# 以下安全更新软件源包含了官方源与镜像站配置，如有需要可自行修改注释切换
+deb https://mirrors.bfsu.edu.cn/debian-security bookworm-security main contrib non-free non-free-firmware
+# deb-src https://mirrors.bfsu.edu.cn/debian-security bookworm-security main contrib non-free non-free-firmware
+```
+
+### 树莓派专用软件源
+
+> [北外开源](https://mirrors.bfsu.edu.cn/help/raspberrypi/)
 
 编辑 `/etc/apt/sources.list.d/raspi.list` 文件。
 
-```
+```shell
 deb https://mirrors.bfsu.edu.cn/raspberrypi/ bookworm main
 ```
-
-## 配置ssh连接
 
 ## 风扇调速
 
 [Rockchip平台cpu散热风扇随温度自动调速的配置方法_pwm-fan-CSDN博客](https://blog.csdn.net/weixin_43245753/article/details/126227479)
 
-## 安装docker
+## 硬盘自动挂载
 
-## 搭建第一个网站
+打开`/etc/fstab`，在行尾添加下列语句：
 
-## 搭建gitea
+> UUID使用`blkid`获取
 
-## 搭建私人网盘
+```shell
+UUID=6d4b63d9-dad3-41d2-b4bc-caa3a4727130 /mnt/disk1 ext4 defaults,auto,users,rw,nofail 0 0
+```
 
-## 内网穿透
+重启后，即可看到硬盘自动挂载到了`/mnt/disk1`目录下了。
 
-基于腾讯云轻量服务器
+## 软件安装
+
+### 安装docker
+
+> [北外开源-docker](https://mirrors.bfsu.edu.cn/help/docker-ce/)
+
+#### 自动安装方式
+
+Docker 提供了一个自动配置与安装的脚本，支持 Debian、RHEL、SUSE 系列及衍生系统的安装。
+
+```shell
+export DOWNLOAD_URL="https://mirrors.bfsu.edu.cn/docker-ce"
+# 如您使用 curl
+curl -fsSL https://get.docker.com/ | sh
+# 如您使用 wget
+wget -O- https://get.docker.com/ | sh
+```
+
+### 安装k3s
+
+1. 前提配置
+
+   `cgroup_memory=1 cgroup_enable=memory` to /boot/cmdline.txt
+
+2. 使用自动脚本安装
+
+   ```shell
+   curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -
+   ```

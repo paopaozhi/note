@@ -9,7 +9,8 @@ wsl install Ubuntu-24.04
 ## 安装依赖库
 
 ```shell
-sudo apt-get install build-essential gcc g++ make zlib* libffi-dev e2fsprogs pkg-config flex bison perl bc openssl libssl-dev libelf-dev libc6-dev binutils binutils-dev libdwarf-dev u-boot-tools mtd-utils gcc-arm-linux-gnueabi cpio device-tree-compiler net-tools openssh-server git vim openjdk-11-jre-headless
+sudo apt-get install build-essential zlib* libffi-dev libssl-dev libelf-dev libc6-dev binutils binutils-dev libdwarf-dev
+sudo apt install gcc g++ make gcc-arm-linux-gnueabi e2fsprogs cpio device-tree-compiler net-tools openssh-server git vim openjdk-11-jre-headless u-boot-tools mtd-utils bc openssl pkg-config flex bison perl
 ```
 
 ## 安装工具
