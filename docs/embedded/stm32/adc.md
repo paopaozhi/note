@@ -7,3 +7,7 @@
 | Single-ended | 单端模式 |
 | Differential | 差分模式 |
 
+## 使用定时器采集ADC
+
+## 多通道轮询模式采集ADC
+
